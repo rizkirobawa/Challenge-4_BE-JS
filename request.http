@@ -15,6 +15,22 @@ Content-Type: application/json
 GET http://localhost:3000/v1/users
 
 ###
-GET http://localhost:3000/v1/users/4
+GET http://localhost:3000/v1/users/5
 
+###
 
+PUT http://localhost:3000/v1/users/5
+Content-Type: application/json
+
+{
+    "name": "michael",
+    "email": "abcde@gmail.com",
+    "password": "123456",
+    "identity_type": "SIM",
+    "identity_number": "3578012412031231",
+    "address": "Jl. Langit Malam No.2 AB"
+
+}
+
+###
+DELETE http://localhost:3000/v1/users/4
