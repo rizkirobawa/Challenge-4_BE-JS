@@ -1,24 +1,24 @@
+### create users include profiles
 POST http://localhost:3000/v1/users
 Content-Type: application/json
 
 {
-    "name": "Kibow",
-    "email": "kibow@gmail.com",
-    "password": "kibowole",
+    "name": "Dewa",
+    "email": "dewaenakenak@gmail.com",
+    "password": "1234",
     "identity_type": "KTP",
-    "identity_number": "3578012412030001",
-    "address": "Jl. Los Angles No.3 B"
+    "identity_number": "3578012412030005",
+    "address": "Jl. Ndologok G No.99"
 
 }
 
-###
+### get all users
 GET http://localhost:3000/v1/users
 
-###
-GET http://localhost:3000/v1/users/5
+### get users by id
+GET http://localhost:3000/v1/users/2
 
-###
-
+### update users includ profiles by id
 PUT http://localhost:3000/v1/users/5
 Content-Type: application/json
 
@@ -32,5 +32,36 @@ Content-Type: application/json
 
 }
 
+### delete users by id
+DELETE http://localhost:3000/v1/users/5
+
+### create bank_accounts
+POST http://localhost:3000/v1/accounts
+Content-Type: application/json
+
+{
+    "bank_name": "BRI",
+    "bank_account_number": "123947627317193",
+    "balance": 3000000,
+    "user_id": 4
+}
+
+### get all accounts
+GET http://localhost:3000/v1/accounts
+
+### get account by id
+GET http://localhost:3000/v1/accounts/2
+
 ###
-DELETE http://localhost:3000/v1/users/4
+PUT http://localhost:3000/v1/accounts/2
+Content-Type: application/json
+
+{
+    "bank_name": "BCA",
+    "bank_account_number": "76518395876534",
+    "balance": 5000000
+
+}
+
+###
+DELETE http://localhost:3000/v1/accounts/4

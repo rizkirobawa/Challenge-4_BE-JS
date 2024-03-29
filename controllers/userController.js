@@ -161,7 +161,7 @@ module.exports = {
 
       res.status(200).json({
         status: true,
-        message: `Update data with ID ${id} successfully`,
+        message: `Update user with ID ${id} successfully`,
         data: user,
       });
     } catch (error) {
