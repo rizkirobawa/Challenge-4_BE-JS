@@ -2,12 +2,12 @@ POST http://localhost:3000/v1/users
 Content-Type: application/json
 
 {
-    "name": "Bagus",
-    "email": "Bagus@gmail.com",
-    "password": "bagusdpa4",
+    "name": "Kibow",
+    "email": "kibow@gmail.com",
+    "password": "kibowole",
     "identity_type": "KTP",
-    "identity_number": "3578012419093501",
-    "address": "Jl. Street 31 No.3 B"
+    "identity_number": "3578012412030001",
+    "address": "Jl. Los Angles No.3 B"
 
 }
 
@@ -15,6 +15,6 @@ Content-Type: application/json
 GET http://localhost:3000/v1/users
 
 ###
-GET http://localhost:3000/v1/users/1
+GET http://localhost:3000/v1/users/4
 
 

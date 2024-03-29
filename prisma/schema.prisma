@@ -25,14 +25,20 @@ model User {
 }
 
 model Profile {
-  id              Int    @id @default(autoincrement())
-  identity_type   String
+  id              Int          @id @default(autoincrement())
+  identity_type   IdentityType
   identity_number String
   address         String
-  user            User?  @relation(fields: [user_id], references: [id])
-  user_id         Int?   @unique
+  user            User?        @relation(fields: [user_id], references: [id])
+  user_id         Int?         @unique
 
   @@map("profiles")
+}
+
+enum IdentityType {
+  KTP
+  SIM
+  Passport
 }
 
 model BankAccount {
@@ -41,7 +47,7 @@ model BankAccount {
   bank_account_number String
   balance             Int
   user                User?  @relation(fields: [user_id], references: [id])
-  user_id              Int?
+  user_id             Int?
 
   @@map("bank_accounts")
 }
