@@ -114,6 +114,7 @@ module.exports = {
       res.status(200).json({
         status: true,
         message: `User with ID ${id} deleted successfully`,
+        data: null,
       });
     } catch (error) {
       next(error);
