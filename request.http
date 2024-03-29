@@ -3,12 +3,12 @@ POST http://localhost:3000/v1/users
 Content-Type: application/json
 
 {
-    "name": "Dewa",
-    "email": "dewaenakenak@gmail.com",
-    "password": "1234",
+    "name": "abiyyi",
+    "email": "abiyyisaja@gmail.com",
+    "password": "biyyiz",
     "identity_type": "KTP",
-    "identity_number": "3578012412030005",
-    "address": "Jl. Ndologok G No.99"
+    "identity_number": "3578012412020005",
+    "address": "Jl. Tuman No.03"
 
 }
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 GET http://localhost:3000/v1/users
 
 ### get users by id
-GET http://localhost:3000/v1/users/2
+GET http://localhost:3000/v1/users/4
 
 ### update users includ profiles by id
 PUT http://localhost:3000/v1/users/5
@@ -33,7 +33,7 @@ Content-Type: application/json
 }
 
 ### delete users by id
-DELETE http://localhost:3000/v1/users/5
+DELETE http://localhost:3000/v1/users/7
 
 ### create bank_accounts
 POST http://localhost:3000/v1/accounts
@@ -41,8 +41,8 @@ Content-Type: application/json
 
 {
     "bank_name": "BRI",
-    "bank_account_number": "123947627317193",
-    "balance": 3000000,
+    "bank_account_number": "123947611117193",
+    "balance": 2000000,
     "user_id": 4
 }
 
@@ -50,18 +50,37 @@ Content-Type: application/json
 GET http://localhost:3000/v1/accounts
 
 ### get account by id
-GET http://localhost:3000/v1/accounts/2
+GET http://localhost:3000/v1/accounts/4
 
-###
-PUT http://localhost:3000/v1/accounts/2
+### update accounts by id
+PUT http://localhost:3000/v1/accounts/4
 Content-Type: application/json
 
 {
-    "bank_name": "BCA",
-    "bank_account_number": "76518395876534",
-    "balance": 5000000
+    "bank_name": "Mandiri",
+    "bank_account_number": "76518395874444",
+    "balance": 1000000
 
 }
 
-###
-DELETE http://localhost:3000/v1/accounts/4
+### delete accounts by id
+DELETE http://localhost:3000/v1/accounts/
+
+### create transactions
+POST http://localhost:3000/v1/transactions
+Content-Type: application/json
+
+{
+    "amount": 150000,
+    "sourceAccount": 1,
+    "destinationAccount": 3
+}
+
+### get all transactions
+GET http://localhost:3000/v1/transactions
+
+### get transactions by id
+GET http://localhost:3000/v1/transactions/1
+
+### delete transactions by id
+DELETE http://localhost:3000/v1/transactions/7
