@@ -1,6 +1,13 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+// Error handling function
+const handleError = (res, statusCode, message) => {
+  return res
+    .status(statusCode)
+    .json({ status: false, message: message, data: null });
+};
+
 module.exports = {
   register: async (req, res, next) => {
     try {
@@ -11,24 +18,23 @@ module.exports = {
       });
 
       if (createUser) {
-        return res.status(400).json({
-          status: false,
-          message: " Email already used!",
-        });
+        return handleError(res, 400, "Email already used!");
       }
 
       if (!["KTP", "SIM", "Passport"].includes(identity_type)) {
-        return res.status(400).json({
-          status: false,
-          message: "Invalid identity_type. Must be KTP, SIM, or Passport",
-        });
+        return handleError(
+          res,
+          400,
+          "Invalid identity_type. Must be KTP, SIM, or Passport"
+        );
       }
 
       if (!identity_number || identity_number.length !== 16) {
-        return res.status(400).json({
-          status: false,
-          message: "Invalid identity number. Must be exactly 16 characters",
-        });
+        return handleError(
+          res,
+          400,
+          "Invalid identity number. Must be exactly 16 characters"
+        );
       }
 
       let user = await prisma.user.create({
@@ -76,11 +82,7 @@ module.exports = {
       });
 
       if (!user) {
-        return res.status(404).json({
-          status: false,
-          message: "Can't find user with ID " + id,
-          data: null,
-        });
+        return handleError(res, 404, `Can't find user with ID ${id}`);
       }
 
       res.status(200).json({
@@ -101,10 +103,7 @@ module.exports = {
       });
 
       if (!user) {
-        return res.status(404).json({
-          status: false,
-          message: `User with ID ${id} not found`,
-        });
+        return handleError(res, 404, `User with ID ${id} not found`);
       }
 
       await prisma.user.delete({
@@ -128,10 +127,11 @@ module.exports = {
         req.body;
 
       if (!identity_number || identity_number.length !== 16) {
-        return res.status(400).json({
-          status: false,
-          message: "Invalid identity number. Must be exactly 16 characters",
-        });
+        return handleError(
+          res,
+          400,
+          "Invalid identity number. Must be exactly 16 characters"
+        );
       }
 
       const user = await prisma.user.update({
@@ -154,10 +154,7 @@ module.exports = {
       });
 
       if (!user) {
-        return res.status(404).json({
-          status: false,
-          message: `User with ID ${id} not found`,
-        });
+        return handleError(res, 404, `User with ID ${id} not found`);
       }
 
       res.status(200).json({

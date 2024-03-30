@@ -1,6 +1,13 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+// Error handling function
+const handleError = (res, statusCode, message) => {
+  return res
+    .status(statusCode)
+    .json({ status: false, message: message, data: null });
+};
+
 module.exports = {
   create: async (req, res, next) => {
     try {
@@ -15,18 +22,20 @@ module.exports = {
         where: { id: destinationAccountId },
       });
 
-      if (!sourceAccount && !destinationAccount) {
-        return res.status(404).json({
-          status: false,
-          message: `Can't find source or destination account `,
-        });
+      if (!sourceAccount || !destinationAccount) {
+        return handleError(
+          res,
+          404,
+          `Can't find source or destination account`
+        );
       }
 
       if (sourceAccount.balance < amount) {
-        return res.staatus(400).json({
-          status: false,
-          message: `The balance in the source account is insufficient`,
-        });
+        return handleError(
+          res,
+          400,
+          `The balance in the source account is insufficient`
+        );
       }
 
       const updateSourceAccount = await prisma.bankAccount.update({
@@ -94,11 +103,7 @@ module.exports = {
       });
 
       if (!transaction) {
-        return res.status(404).json({
-          status: false,
-          message: `Can't find transaction with ID ${id}`,
-          data: null,
-        });
+        return handleError(res, 404, `Can't find transaction with ID ${id}`);
       }
 
       res.status(200).json({ status: true, message: "OK", data: transaction });
@@ -115,11 +120,7 @@ module.exports = {
       });
 
       if (!transaction) {
-        return res.status(404).json({
-          status: false,
-          message: `Can't find transaction with ID ${id}`,
-          data: null,
-        });
+        return handleError(res, 404, `Can't find transaction with ID ${id}`);
       }
 
       await prisma.transaction.delete({ where: { id } });

@@ -3,12 +3,12 @@ POST http://localhost:3000/v1/users
 Content-Type: application/json
 
 {
-    "name": "abiyyi",
-    "email": "abiyyisaja@gmail.com",
-    "password": "biyyiz",
+    "name": "test1",
+    "email": "test1@gmail.com",
+    "password": "test1",
     "identity_type": "KTP",
-    "identity_number": "3578012412020005",
-    "address": "Jl. Tuman No.03"
+    "identity_number": "3578012412020007",
+    "address": "Jl. Jacob No.666"
 
 }
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 GET http://localhost:3000/v1/users
 
 ### get users by id
-GET http://localhost:3000/v1/users/4
+GET http://localhost:3000/v1/users/6
 
 ### update users includ profiles by id
 PUT http://localhost:3000/v1/users/5
@@ -33,46 +33,46 @@ Content-Type: application/json
 }
 
 ### delete users by id
-DELETE http://localhost:3000/v1/users/7
+DELETE http://localhost:3000/v1/users/6
 
 ### create bank_accounts
 POST http://localhost:3000/v1/accounts
 Content-Type: application/json
 
 {
-    "bank_name": "BRI",
-    "bank_account_number": "123947611117193",
-    "balance": 2000000,
-    "user_id": 4
+    "bank_name": "Jago",
+    "bank_account_number": "123947611117195",
+    "balance": 750000,
+    "user_id": 5
 }
 
 ### get all accounts
 GET http://localhost:3000/v1/accounts
 
 ### get account by id
-GET http://localhost:3000/v1/accounts/4
+GET http://localhost:3000/v1/accounts/7
 
 ### update accounts by id
-PUT http://localhost:3000/v1/accounts/4
+PUT http://localhost:3000/v1/accounts/7
 Content-Type: application/json
 
 {
-    "bank_name": "Mandiri",
-    "bank_account_number": "76518395874444",
-    "balance": 1000000
+    "bank_name": "BCA Syariah",
+    "bank_account_number": "7651839587556",
+    "balance": 200000
 
 }
 
 ### delete accounts by id
-DELETE http://localhost:3000/v1/accounts/
+DELETE http://localhost:3000/v1/accounts/7
 
 ### create transactions
 POST http://localhost:3000/v1/transactions
 Content-Type: application/json
 
 {
-    "amount": 150000,
-    "sourceAccount": 1,
+    "amount": 200000,
+    "sourceAccount": 2,
     "destinationAccount": 3
 }
 
@@ -80,7 +80,7 @@ Content-Type: application/json
 GET http://localhost:3000/v1/transactions
 
 ### get transactions by id
-GET http://localhost:3000/v1/transactions/1
+GET http://localhost:3000/v1/transactions/8
 
 ### delete transactions by id
 DELETE http://localhost:3000/v1/transactions/7

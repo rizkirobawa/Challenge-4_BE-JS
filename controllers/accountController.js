@@ -1,20 +1,27 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+// Error handling function
+const handleError = (res, statusCode, message) => {
+  return res
+    .status(statusCode)
+    .json({ status: false, message: message, data: null });
+};
+
+// User validate function
+const validateUser = async (user_id) => {
+  return prisma.user.findUnique({ where: { id: user_id } });
+};
+
 module.exports = {
   create: async (req, res, next) => {
     try {
       let { bank_name, bank_account_number, balance, user_id } = req.body;
 
-      const existingUser = await prisma.user.findUnique({
-        where: { id: user_id },
-      });
+      const existingUser = await validateUser(user_id);
 
       if (!existingUser) {
-        return res.status(404).json({
-          status: false,
-          message: `User with ID ${user_id} not found`,
-        });
+        return handleError(res, 404, `User with ID ${user_id} not found`);
       }
 
       const newBankAccount = await prisma.bankAccount.create({
@@ -59,11 +66,7 @@ module.exports = {
       });
 
       if (!accounts) {
-        return res.status(404).json({
-          status: false,
-          message: `Can't find account with ID ${id}`,
-          data: null,
-        });
+        return handleError(res, 404, `Can't find account with ID ${id}`);
       }
 
       res.status(200).json({
@@ -90,10 +93,7 @@ module.exports = {
       });
 
       if (!accounts) {
-        return res.status(404).json({
-          status: false,
-          message: `Account with ID ${id} not found`,
-        });
+        return handleError(res, 404, `Account with ID ${id} not found`);
       }
 
       res.status(200).json({
@@ -112,11 +112,7 @@ module.exports = {
       let accounts = await prisma.bankAccount.findUnique({ where: { id: id } });
 
       if (!accounts) {
-        return res.status(404).json({
-          status: false,
-          message: `User with ID ${id} not found`,
-          data: null,
-        });
+        return handleError(res, 404, `Account with ID ${id} not found`);
       }
 
       await prisma.bankAccount.delete({
